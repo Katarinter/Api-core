@@ -1,27 +1,16 @@
-// FileName: index.js
-// Import express
 const express = require('express');
-// Initialize the app
-const app = express(),
-  http = require("http"),
-  server = http.createServer(app),
-  mongoose = require("mongoose");
+// const mongoose = require('mongoose');
+const mainRoute = require('./routes/mainRoute');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(methodOverride());
+const app = express();
+const port = 3000;
 
-var router = express.Router();
+app.use(express.urlencoded({
+  extended: false,
+}));
+app.use(express.json());
+app.use('/', mainRoute);
 
-// Setup server port
-const port = process.env.PORT || 3000;
-// Send message for default URL
-app.get('/', (req, res) => res.send('Hola'));
-// Launch app to listen to specified port
 app.listen(port, () => {
-  console.log(`Running RestHub on port  ${port}`);
+  console.log(`Node server running on http://localhost:${port}`);
 });
-
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/tvshows');
