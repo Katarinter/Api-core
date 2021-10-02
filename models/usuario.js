@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const user = new Schema({
+  email: {
+    type: String, unique: true, immutable: true, required: [true, 'email required'],
+  },
   name: { type: String },
   tlf: { type: Number },
   country: { type: String },
